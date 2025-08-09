@@ -17,14 +17,16 @@ export default function MoodForm({
 }) {
   return (
     <form className="">
-      <h1 className="text-[#22224f] font-bold text-3xl">
+      <h1 className="text-3xl font-bold text-[#22224f]">
         How was your mood today?
       </h1>
       {moods.length > 0
         ? moods.map((m) => (
-            <div className="flex  justify-start items-center space-x-6 my-4 bg-white p-4 rounded-2xl border border-blue-50 hover:bg-blue-50 hover:border-blue-100 text-[#22224f] font-semibold cursor-pointer ">
+            <div
+              className={`my-5 space-x-5 rounded-2xl border border-blue-200 p-3 text-2xl font-semibold text-blue-950 ${state.moodName == m.moodName ? "border-2 border-blue-500" : ""} cursor-pointer bg-white`}
+            >
               <input
-                className=""
+                className="accent-blue-500"
                 type="radio"
                 name="mood"
                 id={m.moodName.trim()}
@@ -37,7 +39,7 @@ export default function MoodForm({
                   });
                 }}
               />
-              <label className="" htmlFor={m.moodName.trim()}>
+              <label className="cursor-pointer" htmlFor={m.moodName.trim()}>
                 {m.moodName}
               </label>
             </div>

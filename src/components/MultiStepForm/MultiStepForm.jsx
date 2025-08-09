@@ -37,7 +37,7 @@ export default function MultiStepForm() {
   }, [state]);
 
   return (
-    <div className="bg-[#f5f5ff] rounded-3xl w-lg m-auto p-8">
+    <div className="m-auto w-lg rounded-3xl bg-[#f5f5ff] p-8">
       {state.step == 1 && (
         <MoodForm
           state={state}
