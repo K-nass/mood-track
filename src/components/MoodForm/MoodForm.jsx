@@ -1,4 +1,5 @@
 import React from "react";
+import HeaderForm from "../HeaderForm/HeaderForm";
 // import style from './MoodForm.module.css'
 
 const moods = [
@@ -17,9 +18,10 @@ export default function MoodForm({
 }) {
   return (
     <form className="">
-      <h1 className="text-3xl font-bold text-[#22224f]">
-        How was your mood today?
-      </h1>
+     
+      <HeaderForm>
+        How did you feel?
+      </HeaderForm>
       {moods.length > 0
         ? moods.map((m) => (
             <div
