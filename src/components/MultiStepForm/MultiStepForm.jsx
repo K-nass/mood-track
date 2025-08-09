@@ -38,6 +38,21 @@ export default function MultiStepForm() {
 
   return (
     <div className="m-auto w-lg rounded-3xl bg-[#f5f5ff] p-8">
+      <h1 className="text-3xl font-bold text-[#22224f]">Log your mood</h1>
+      <div className="my-10 flex justify-between gap-3">
+        <span
+          className={`h-2 w-1/4 rounded ${state.step === 1 ? "bg-blue-500" : "bg-gray-400"}`}
+        ></span>
+        <span
+          className={`h-2 w-1/4 rounded ${state.step === 2 ? "bg-blue-500" : "bg-gray-400"}`}
+        ></span>
+        <span
+          className={`h-2 w-1/4 rounded ${state.step === 3 ? "bg-blue-500" : "bg-gray-400"}`}
+        ></span>
+        <span
+          className={`h-2 w-1/4 rounded ${state.step === 4 ? "bg-blue-500" : "bg-gray-400"}`}
+        ></span>
+      </div>
       {state.step == 1 && (
         <MoodForm
           state={state}

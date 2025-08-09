@@ -6,7 +6,7 @@ const moods = [
   { id: 2, moodName: "Happy", moodImg: "" },
   { id: 3, moodName: "Neutral", moodImg: "" },
   { id: 4, moodName: "Sad", moodImg: "" },
-  { id: 5, moodName: "very Sad", moodImg: "" },
+  { id: 5, moodName: "Very Sad", moodImg: "" },
 ];
 export default function MoodForm({
   state,
@@ -23,7 +23,7 @@ export default function MoodForm({
       {moods.length > 0
         ? moods.map((m) => (
             <div
-              className={`my-5 space-x-5 rounded-2xl border border-blue-200 p-3 text-2xl font-semibold text-blue-950 ${state.moodName == m.moodName ? "border-2 border-blue-500" : ""} cursor-pointer bg-white`}
+              className={`my-5 space-x-5 rounded-2xl border border-blue-200 p-3 text-2xl font-semibold text-blue-950 ${state.moodName == m.moodName ? "border-2 border-blue-500" : ""} box-border cursor-pointer bg-white hover:bg-[#f5f5ff]`}
             >
               <input
                 className="accent-blue-500"
@@ -47,6 +47,7 @@ export default function MoodForm({
         : "there is no moods"}
 
       <button
+        className="w-full cursor-pointer rounded-2xl bg-blue-500 p-4 font-bold text-white hover:bg-blue-600"
         onClick={(e) => {
           e.preventDefault();
           if (!state.moodName) {
