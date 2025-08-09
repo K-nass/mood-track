@@ -16,12 +16,15 @@ export default function MoodForm({
   incrementAction,
 }) {
   return (
-    <form>
-      <h1>How was your mood today?</h1>
+    <form className="">
+      <h1 className="text-[#22224f] font-bold text-3xl">
+        How was your mood today?
+      </h1>
       {moods.length > 0
         ? moods.map((m) => (
-            <>
+            <div className="flex  justify-start items-center space-x-6 my-4 bg-white p-4 rounded-2xl border border-blue-50 hover:bg-blue-50 hover:border-blue-100 text-[#22224f] font-semibold cursor-pointer ">
               <input
+                className=""
                 type="radio"
                 name="mood"
                 id={m.moodName.trim()}
@@ -34,9 +37,10 @@ export default function MoodForm({
                   });
                 }}
               />
-              <label htmlFor={m.moodName.trim()}>{m.moodName}</label>
-              <br />
-            </>
+              <label className="" htmlFor={m.moodName.trim()}>
+                {m.moodName}
+              </label>
+            </div>
           ))
         : "there is no moods"}
 
