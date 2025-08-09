@@ -17,18 +17,15 @@ export default function MoodForm({
   incrementAction,
 }) {
   return (
-    <form className="">
-     
-      <HeaderForm>
-        How did you feel?
-      </HeaderForm>
+    <form>
+      <HeaderForm>How did you feel?</HeaderForm>
       {moods.length > 0
         ? moods.map((m) => (
             <div
               className={`my-5 space-x-5 rounded-2xl border border-blue-200 p-3 text-2xl font-semibold text-blue-950 ${state.moodName == m.moodName ? "border-2 border-blue-500" : ""} box-border cursor-pointer bg-white hover:bg-[#f5f5ff]`}
             >
               <input
-                className="accent-blue-500"
+                className="h-5 w-5 rounded text-blue-500 focus:ring-blue-400"
                 type="radio"
                 name="mood"
                 id={m.moodName.trim()}
@@ -41,7 +38,10 @@ export default function MoodForm({
                   });
                 }}
               />
-              <label className="cursor-pointer" htmlFor={m.moodName.trim()}>
+              <label
+                className="cursor-pointer text-gray-700 select-none"
+                htmlFor={m.moodName.trim()}
+              >
                 {m.moodName}
               </label>
             </div>

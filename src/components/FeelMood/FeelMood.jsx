@@ -1,4 +1,5 @@
 import React from "react";
+import HeaderForm from "../HeaderForm/HeaderForm";
 // import style from "./FeelMood.module.css";
 
 const feelMoods = [
@@ -18,8 +19,7 @@ const feelMoods = [
   { id: 14, feelMood: "Restless" },
   { id: 15, feelMood: "Stressed" },
   { id: 16, feelMood: "Tired" },
-  { id: 17, feelMood: "Anxious" },
-  { id: 18, feelMood: "Calm" },
+  { id: 17, feelMood: "Calm" },
 ];
 
 export default function FeelMood({
@@ -31,26 +31,36 @@ export default function FeelMood({
 }) {
   return (
     <form>
-      <h1>How did you feel</h1>
-      {feelMoods.map((m) => (
-        <>
-          <input
-            type="checkbox"
-            name="feelMood"
-            id={m.feelMood}
-            value={m.feelMood}
-            onChange={(e) => {
-              dispatch({
-                type: updateAction,
-                field: "feelMood",
-                payLoad: e.target.value,
-              });
-            }}
-          />
-          <label htmlFor={m.feelMood}>{m.feelMood}</label>
-          <br />
-        </>
-      ))}
+      <HeaderForm>How did you feel</HeaderForm>
+      <div className="mt-4 flex flex-wrap items-center gap-4">
+        {feelMoods.map((m) => (
+          <div
+            className={`flex gap-2 border hover:bg-[#f5f5ff] ${state.feelMood === m.feelMood ? "border-blue-500" : "border-blue-200"} rounded-2xl p-3`}
+          >
+            <input
+              className="cursor-pointer accent-blue-500"
+              key={m.id}
+              type="checkbox"
+              name="feelMood"
+              id={m.feelMood}
+              value={m.feelMood}
+              onChange={(e) => {
+                dispatch({
+                  type: updateAction,
+                  field: "feelMood",
+                  payLoad: e.target.value,
+                });
+              }}
+            />
+            <label
+              className="cursor-pointer font-semibold text-[#22224f]"
+              htmlFor={m.feelMood}
+            >
+              {m.feelMood}
+            </label>
+          </div>
+        ))}
+      </div>
       <button
         onClick={(e) => {
           e.preventDefault();
