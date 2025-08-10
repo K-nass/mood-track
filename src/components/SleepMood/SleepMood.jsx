@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FormButton from "../FormButton/FormButton";
+import MoodOption from "../MoodOption/MoodOption";
 // import style from "./SleepMood.module.css";
 
 const sleepMood = [
@@ -22,23 +23,20 @@ export default function SleepMood({
         <form>
           <h1>How many hours did you sleep last night?</h1>
           {sleepMood.map((m) => (
-            <>
-              <input
-                type="radio"
-                name="sleepMood"
-                id={m.sleepMood}
-                value={m.sleepMood}
-                onChange={(e) => {
-                  dispatch({
-                    type: updateAction,
-                    field: "sleepMood",
-                    payLoad: e.target.value,
-                  });
-                }}
-              />
-              <label htmlFor={m.sleepMood}>{m.sleepMood}</label>
-              <br />
-            </>
+            <MoodOption
+              key={m.id}
+              stateValue={state.sleepMood}
+              name="sleepMood"
+              id={m.sleepMood}
+              currentValue={m.sleepMood}
+              onChange={(e) => {
+                dispatch({
+                  type: updateAction,
+                  field: "sleepMood",
+                  payLoad: e.target.value,
+                });
+              }}
+            />
           ))}
           <FormButton
             label="Submit"

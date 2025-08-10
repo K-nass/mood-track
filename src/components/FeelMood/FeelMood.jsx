@@ -36,6 +36,7 @@ export default function FeelMood({
       <div className="mt-4 flex flex-wrap items-center gap-4">
         {feelMoods.map((m) => (
           <div
+            key={m.id}
             className={`flex gap-2 border hover:bg-[#f5f5ff] ${state.feelMood === m.feelMood ? "border-blue-500" : "border-blue-200"} rounded-2xl p-3`}
           >
             <input

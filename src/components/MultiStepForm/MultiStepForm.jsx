@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useReducer } from "react";
 import MoodForm from "../MoodForm/MoodForm";
 import FeelMood from "../FeelMood/FeelMood";
 import LogMood from "../LogMood/LogMood";
@@ -31,11 +31,6 @@ export default function MultiStepForm() {
     sleepMood: "",
     error: null,
   });
-
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
-
   return (
     <div className="m-auto w-lg rounded-3xl bg-[#f5f5ff] p-8">
       <h1 className="text-3xl font-bold text-[#22224f]">Log your mood</h1>
