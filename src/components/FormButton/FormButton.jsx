@@ -1,11 +1,12 @@
 import React from "react";
-export default function FormButton({ label, onClick }) {
+export default function FormButton({ label, onClick, loading }) {
   return (
     <button
-      className="w-full cursor-pointer rounded-2xl bg-blue-500 p-4 font-bold text-white hover:bg-blue-600"
+      className={`w-full ${loading ? "cursor-default bg-gray-500 hover:bg-gray-500" : "cursor-pointer"} rounded-2xl bg-blue-500 p-4 font-bold text-white hover:bg-blue-600`}
+      disabled={loading}
       onClick={onClick}
     >
-      {label}
+      {loading ? "Loading ..." : label}
     </button>
   );
 }

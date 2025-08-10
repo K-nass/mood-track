@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import FormButton from "../FormButton/FormButton";
 import MoodOption from "../MoodOption/MoodOption";
-// import style from "./SleepMood.module.css";
+import ConfirmationMessage from "../ConfirmationMessage/ConfirmationMessage";
+import HeaderForm from "../HeaderForm/HeaderForm";
 
 const sleepMood = [
   { id: 1, sleepMood: "9+hours" },
@@ -17,11 +18,12 @@ export default function SleepMood({
   errorAction,
 }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   return (
     <>
       {!isSubmitted ? (
         <form>
-          <h1>How many hours did you sleep last night?</h1>
+          <HeaderForm>How many hours did you sleep last night?</HeaderForm>
           {sleepMood.map((m) => (
             <MoodOption
               key={m.id}
@@ -40,6 +42,7 @@ export default function SleepMood({
           ))}
           <FormButton
             label="Submit"
+            loading={loading}
             onClick={(e) => {
               e.preventDefault();
               if (!state.sleepMood) {
@@ -49,13 +52,19 @@ export default function SleepMood({
                 });
                 return;
               }
-              setIsSubmitted(true);
+              setLoading(true);
+              // setIsSubmitted(true);
+              //simulate loading
+              setTimeout(() => {
+                setIsSubmitted(true);
+                setLoading(false);
+              }, 3000);
             }}
           />
           {state.error && <p style={{ color: "red" }}>{state.error}</p>}
         </form>
       ) : (
-        "logged success"
+        <ConfirmationMessage />
       )}
     </>
   );
