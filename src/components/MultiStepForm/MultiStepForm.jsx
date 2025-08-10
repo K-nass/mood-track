@@ -22,7 +22,7 @@ function reducer(state, action) {
       return { ...state };
   }
 }
-export default function MultiStepForm() {
+export default function MultiStepForm({ handleCloseForm }) {
   const [state, dispatch] = useReducer(reducer, {
     step: 1,
     moodName: "",
@@ -38,6 +38,7 @@ export default function MultiStepForm() {
   return (
     <div className="m-auto w-lg rounded-3xl bg-[#f5f5ff] p-8 shadow">
       <h1 className="text-3xl font-bold text-[#22224f]">Log your mood</h1>
+      <button onClick={() => handleCloseForm(false)}>x</button>
       <div className="my-10 flex justify-between gap-3">
         {Array.from({ length: 4 }).map((_, idx) => (
           <StepIndictor
