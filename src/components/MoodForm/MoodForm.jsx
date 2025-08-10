@@ -1,6 +1,7 @@
 import React from "react";
 import HeaderForm from "../HeaderForm/HeaderForm";
 // import style from './MoodForm.module.css'
+import FormButton from "../FormButton/FormButton";
 
 const moods = [
   { id: 1, moodName: "very Happy", moodImg: "" },
@@ -25,7 +26,7 @@ export default function MoodForm({
               className={`my-5 space-x-5 rounded-2xl border border-blue-200 p-3 text-2xl font-semibold text-blue-950 ${state.moodName == m.moodName ? "border-2 border-blue-500" : ""} box-border cursor-pointer bg-white hover:bg-[#f5f5ff]`}
             >
               <input
-                className="h-5 w-5 rounded text-blue-500 focus:ring-blue-400"
+                className="h-5 w-5 rounded text-blue-500 accent-blue-500 focus:ring-blue-400"
                 type="radio"
                 name="mood"
                 id={m.moodName.trim()}
@@ -47,9 +48,8 @@ export default function MoodForm({
             </div>
           ))
         : "there is no moods"}
-
-      <button
-        className="w-full cursor-pointer rounded-2xl bg-blue-500 p-4 font-bold text-white hover:bg-blue-600"
+      <FormButton
+        label="Continue"
         onClick={(e) => {
           e.preventDefault();
           if (!state.moodName) {
@@ -58,9 +58,7 @@ export default function MoodForm({
           }
           dispatch({ type: incrementAction });
         }}
-      >
-        Continue
-      </button>
+      />
       {state.error && <p style={{ color: "red" }}>{state.error}</p>}
     </form>
   );

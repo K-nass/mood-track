@@ -1,4 +1,5 @@
 import React from "react";
+import FormButton from "../FormButton/FormButton";
 // import style from "./LogMood.module.css";
 
 export default function LogMood({ dispatch, updateAction, incrementAction }) {
@@ -19,14 +20,13 @@ export default function LogMood({ dispatch, updateAction, incrementAction }) {
         }}
       ></textarea>
       <br />
-      <button
+      <FormButton
+        label="Continue"
         onClick={(e) => {
           e.preventDefault();
           dispatch({ type: incrementAction });
         }}
-      >
-        Continue
-      </button>
+      />
     </form>
   );
 }

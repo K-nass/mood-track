@@ -1,5 +1,6 @@
 import React from "react";
 import HeaderForm from "../HeaderForm/HeaderForm";
+import FormButton from "../FormButton/FormButton";
 // import style from "./FeelMood.module.css";
 
 const feelMoods = [
@@ -61,7 +62,8 @@ export default function FeelMood({
           </div>
         ))}
       </div>
-      <button
+      <FormButton
+        label="Continue"
         onClick={(e) => {
           e.preventDefault();
           if (!state.feelMood) {
@@ -73,9 +75,7 @@ export default function FeelMood({
           }
           dispatch({ type: incrementAction });
         }}
-      >
-        Continue
-      </button>
+      />
       {state.error && <p style={{ color: "red" }}>{state.error}</p>}
     </form>
   );

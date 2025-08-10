@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FormButton from "../FormButton/FormButton";
 // import style from "./SleepMood.module.css";
 
 const sleepMood = [
@@ -39,7 +40,8 @@ export default function SleepMood({
               <br />
             </>
           ))}
-          <button
+          <FormButton
+            label="Submit"
             onClick={(e) => {
               e.preventDefault();
               if (!state.sleepMood) {
@@ -51,9 +53,7 @@ export default function SleepMood({
               }
               setIsSubmitted(true);
             }}
-          >
-            Submit
-          </button>
+          />
           {state.error && <p style={{ color: "red" }}>{state.error}</p>}
         </form>
       ) : (
