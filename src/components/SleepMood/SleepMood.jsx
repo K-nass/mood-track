@@ -3,6 +3,8 @@ import FormButton from "../FormButton/FormButton";
 import MoodOption from "../MoodOption/MoodOption";
 import ConfirmationMessage from "../ConfirmationMessage/ConfirmationMessage";
 import HeaderForm from "../HeaderForm/HeaderForm";
+import { useMoodData } from "../../contexts/MoodDataProvider";
+import { ERROR_ACTION, UPDATE_ACTION } from "../../contexts/moodActions";
 
 const sleepMood = [
   { id: 1, sleepMood: "9+hours" },
@@ -11,14 +13,10 @@ const sleepMood = [
   { id: 4, sleepMood: "3-4hours" },
   { id: 5, sleepMood: "0-2hours" },
 ];
-export default function SleepMood({
-  state,
-  dispatch,
-  updateAction,
-  errorAction,
-}) {
+export default function SleepMood() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { state, dispatch } = useMoodData();
   return (
     <>
       {!isSubmitted ? (
@@ -33,7 +31,7 @@ export default function SleepMood({
               currentValue={m.sleepMood}
               onChange={(e) => {
                 dispatch({
-                  type: updateAction,
+                  type: UPDATE_ACTION,
                   field: "sleepMood",
                   payLoad: e.target.value,
                 });
@@ -47,7 +45,7 @@ export default function SleepMood({
               e.preventDefault();
               if (!state.sleepMood) {
                 dispatch({
-                  type: errorAction,
+                  type: ERROR_ACTION,
                   payLoad: "please select sleep hours",
                 });
                 return;

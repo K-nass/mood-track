@@ -1,7 +1,12 @@
 import React from "react";
 import HeaderForm from "../HeaderForm/HeaderForm";
 import FormButton from "../FormButton/FormButton";
-// import style from "./FeelMood.module.css";
+import { useMoodData } from "../../contexts/MoodDataProvider";
+import {
+  ERROR_ACTION,
+  INCREMENT_ACTION,
+  UPDATE_ACTION,
+} from "../../contexts/moodActions";
 
 const feelMoods = [
   { id: 1, feelMood: "Anxious" },
@@ -23,13 +28,8 @@ const feelMoods = [
   { id: 17, feelMood: "Calm" },
 ];
 
-export default function FeelMood({
-  state,
-  dispatch,
-  updateAction,
-  errorAction,
-  incrementAction,
-}) {
+export default function FeelMood() {
+  const { state, dispatch } = useMoodData();
   return (
     <form>
       <HeaderForm>How did you feel</HeaderForm>
@@ -48,7 +48,7 @@ export default function FeelMood({
               value={m.feelMood}
               onChange={(e) => {
                 dispatch({
-                  type: updateAction,
+                  type: UPDATE_ACTION,
                   field: "feelMood",
                   payLoad: e.target.value,
                 });
@@ -69,12 +69,12 @@ export default function FeelMood({
           e.preventDefault();
           if (!state.feelMood) {
             dispatch({
-              type: errorAction,
+              type: ERROR_ACTION,
               payLoad: "Please at least one feel mood",
             });
             return;
           }
-          dispatch({ type: incrementAction });
+          dispatch({ type: INCREMENT_ACTION });
         }}
       />
       {state.error && <p style={{ color: "red" }}>{state.error}</p>}

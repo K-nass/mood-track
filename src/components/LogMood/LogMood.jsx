@@ -1,16 +1,18 @@
 import React from "react";
 import FormButton from "../FormButton/FormButton";
 import HeaderForm from "../HeaderForm/HeaderForm";
-// import style from "./LogMood.module.css";
+import { useMoodData } from "../../contexts/MoodDataProvider";
+import { UPDATE_ACTION, INCREMENT_ACTION } from "../../contexts/moodActions";
 
-export default function LogMood({ dispatch, updateAction, incrementAction }) {
+export default function LogMood() {
+  const { dispatch } = useMoodData();
   return (
     <form>
       <HeaderForm>write About your day... (optional)</HeaderForm>
       <textarea
         onChange={(e) => {
           dispatch({
-            type: updateAction,
+            type: UPDATE_ACTION,
             field: "logMood",
             payLoad: e.target.value,
             error: null,
@@ -26,7 +28,7 @@ export default function LogMood({ dispatch, updateAction, incrementAction }) {
         label="Continue"
         onClick={(e) => {
           e.preventDefault();
-          dispatch({ type: incrementAction });
+          dispatch({ type: INCREMENT_ACTION });
         }}
       />
     </form>

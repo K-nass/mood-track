@@ -1,11 +1,13 @@
-import MultiStepForm from "./components/MultiStepForm/MultiStepForm";
 import Home from "./components/Home/Home";
 import "./App.css";
+import { MoodDataProvider } from "./contexts/MoodDataProvider";
 
 function App() {
   return (
     <>
-      <Home />
+      <MoodDataProvider>
+        <Home />
+      </MoodDataProvider>
     </>
   );
 }

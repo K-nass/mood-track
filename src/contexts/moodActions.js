@@ -1,0 +1,3 @@
+export const UPDATE_ACTION = "UPDATE_FIELD";
+export const ERROR_ACTION = "SET_ERROR";
+export const INCREMENT_ACTION = "INCREMENT_STEP";
