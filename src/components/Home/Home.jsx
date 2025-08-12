@@ -1,10 +1,10 @@
 import React from "react";
 import AverageMoodCard from "../AverageMoodCard/AverageMoodCard";
-// import style from "./Home.module.css";
 import HeaderForm from "../HeaderForm/HeaderForm";
 import NavPage from "../NavPage/NavPage";
 import { useState } from "react";
 import MultiStepForm from "../MultiStepForm/MultiStepForm";
+import AuthForm from "../AuthForm/AuthForm";
 export default function Home() {
   const [date] = useState(new Date());
   const [isFormHidden, setIsFormHidden] = useState(false);
@@ -32,6 +32,7 @@ export default function Home() {
         <AverageMoodCard />
         <AverageMoodCard />
       </div>
+      <AuthForm />
     </div>
   );
 }
