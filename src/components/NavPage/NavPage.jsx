@@ -1,8 +1,15 @@
 import React from "react";
-import style from './NavPage.module.css'
+import Logo from "../Logo/Logo";
 
 export default function NavPage() {
-    return (
-        <div>NavPage</div>
-    )
+  return (
+    <nav>
+      <ul className="flex justify-between">
+        <li className="flex items-center text-2xl font-bold">
+          <Logo />
+        </li>
+        <li>profile</li>
+      </ul>
+    </nav>
+  );
 }

@@ -5,13 +5,15 @@ import LogMood from "../LogMood/LogMood";
 import SleepMood from "../SleepMood/SleepMood";
 import StepIndictor from "../StepIndicator/StepIndicator";
 import { useMoodData } from "../../contexts/MoodDataProvider";
+import { useNavigate } from "react-router-dom";
 
-export default function MultiStepForm({ handleCloseForm }) {
+export default function MultiStepForm() {
+  const navigate = useNavigate();
   const { state } = useMoodData();
   return (
     <div className="m-auto w-lg rounded-3xl bg-[#f5f5ff] p-8 shadow">
       <h1 className="text-3xl font-bold text-[#22224f]">Log your mood</h1>
-      <button onClick={() => handleCloseForm(false)}>x</button>
+      <button onClick={() => navigate("/")}>x</button>
       <div className="my-10 flex justify-between gap-3">
         {Array.from({ length: 4 }).map((_, idx) => (
           <StepIndictor
