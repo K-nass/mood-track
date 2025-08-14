@@ -3,8 +3,11 @@ import FormButton from "../FormButton/FormButton";
 import MoodOption from "../MoodOption/MoodOption";
 import ConfirmationMessage from "../ConfirmationMessage/ConfirmationMessage";
 import HeaderForm from "../HeaderForm/HeaderForm";
-import { useMoodData } from "../../contexts/MoodDataProvider";
-import { ERROR_ACTION, UPDATE_ACTION } from "../../contexts/moodActions";
+import { useMoodData } from "../../contexts/moodData/MoodDataProvider";
+import {
+  ERROR_ACTION,
+  UPDATE_ACTION,
+} from "../../contexts/moodData/moodActions";
 
 const sleepMood = [
   { id: 1, sleepMood: "9+hours" },
@@ -38,7 +41,7 @@ export default function SleepMood() {
               }}
             />
           ))}
-          <FormButton
+          {/* <FormButton
             label="Submit"
             loading={loading}
             onClick={(e) => {
@@ -58,7 +61,7 @@ export default function SleepMood() {
                 setLoading(false);
               }, 3000);
             }}
-          />
+          /> */}
           {state.error && <p style={{ color: "red" }}>{state.error}</p>}
         </form>
       ) : (

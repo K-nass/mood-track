@@ -1,7 +1,7 @@
 import React from "react";
 import HeaderForm from "../HeaderForm/HeaderForm";
 import { Link } from "react-router-dom";
-import { useMoodData } from "../../contexts/MoodDataProvider";
+import { useMoodData } from "../../contexts/moodData/MoodDataProvider";
 
 export default function WelcomeBanner() {
   const { state } = useMoodData();

@@ -4,7 +4,7 @@ import FeelMood from "../FeelMood/FeelMood";
 import LogMood from "../LogMood/LogMood";
 import SleepMood from "../SleepMood/SleepMood";
 import StepIndictor from "../StepIndicator/StepIndicator";
-import { useMoodData } from "../../contexts/MoodDataProvider";
+import { useMoodData } from "../../contexts/moodData/MoodDataProvider";
 import { useNavigate } from "react-router-dom";
 import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

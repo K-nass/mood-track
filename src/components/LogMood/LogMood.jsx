@@ -1,8 +1,11 @@
 import React from "react";
 import FormButton from "../FormButton/FormButton";
 import HeaderForm from "../HeaderForm/HeaderForm";
-import { useMoodData } from "../../contexts/MoodDataProvider";
-import { UPDATE_ACTION, INCREMENT_ACTION } from "../../contexts/moodActions";
+import { useMoodData } from "../../contexts/moodData/MoodDataProvider";
+import {
+  UPDATE_ACTION,
+  INCREMENT_ACTION,
+} from "../../contexts/moodData/moodActions";
 
 export default function LogMood() {
   const { dispatch } = useMoodData();
@@ -24,13 +27,13 @@ export default function LogMood() {
       ></textarea>
 
       <br />
-      <FormButton
+      {/* <FormButton
         label="Continue"
         onClick={(e) => {
           e.preventDefault();
           dispatch({ type: INCREMENT_ACTION });
         }}
-      />
+      /> */}
     </form>
   );
 }

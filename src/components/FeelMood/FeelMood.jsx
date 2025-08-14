@@ -1,12 +1,12 @@
 import React from "react";
 import HeaderForm from "../HeaderForm/HeaderForm";
 import FormButton from "../FormButton/FormButton";
-import { useMoodData } from "../../contexts/MoodDataProvider";
+import { useMoodData } from "../../contexts/moodData/MoodDataProvider";
 import {
   ERROR_ACTION,
   INCREMENT_ACTION,
   UPDATE_ACTION,
-} from "../../contexts/moodActions";
+} from "../../contexts/moodData/moodActions";
 
 const feelMoods = [
   { id: 1, feelMood: "Anxious" },
@@ -63,7 +63,7 @@ export default function FeelMood() {
           </div>
         ))}
       </div>
-      <FormButton
+      {/* <FormButton
         label="Continue"
         onClick={(e) => {
           e.preventDefault();
@@ -76,7 +76,7 @@ export default function FeelMood() {
           }
           dispatch({ type: INCREMENT_ACTION });
         }}
-      />
+      /> */}
       {state.error && <p style={{ color: "red" }}>{state.error}</p>}
     </form>
   );

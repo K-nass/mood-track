@@ -2,12 +2,12 @@ import React from "react";
 import HeaderForm from "../HeaderForm/HeaderForm";
 import FormButton from "../FormButton/FormButton";
 import MoodOption from "../MoodOption/MoodOption";
-import { useMoodData } from "../../contexts/MoodDataProvider";
+import { useMoodData } from "../../contexts/moodData/MoodDataProvider";
 import {
   ERROR_ACTION,
   UPDATE_ACTION,
   INCREMENT_ACTION,
-} from "../../contexts/moodActions";
+} from "../../contexts/moodData/moodActions";
 
 const moods = [
   { id: 1, moodName: "very Happy", moodImg: "" },
@@ -39,7 +39,7 @@ export default function MoodForm() {
             />
           ))
         : "there is no moods"}
-      <FormButton
+      {/* <FormButton
         label="Continue"
         onClick={(e) => {
           e.preventDefault();
@@ -49,7 +49,7 @@ export default function MoodForm() {
           }
           dispatch({ type: INCREMENT_ACTION });
         }}
-      />
+      /> */}
       {state.error && <p style={{ color: "red" }}>{state.error}</p>}
     </form>
   );
