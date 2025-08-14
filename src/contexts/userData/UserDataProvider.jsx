@@ -5,9 +5,13 @@ const userDataContext = createContext();
 function reducer(state, action) {
   switch (action.type) {
     case "register":
-      return { ...state, [action.field]: action.payload, error: null };
+      return {
+        ...state,
+        [action.field]: action.payload,
+        error: null,
+      };
     case "login":
-      return { ...state, [action.field]: action.payload, error: null };
+      return { ...state, email: action.payload, error: null };
     case "error":
       return { ...state, error: action.payload };
     default:
@@ -17,8 +21,7 @@ function reducer(state, action) {
 
 export default function UserDataProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, {
-    email: "",
-    password: "",
+    userName: "",
     error: null,
   });
   useEffect(() => {

@@ -7,6 +7,7 @@ import MultiStepForm from "./components/MultiStepForm/MultiStepForm";
 import UserDataProvider from "./contexts/userData/UserDataProvider";
 import RegisterForm from "./components/Register/RegisterForm";
 import LoginForm from "./components/LoginForm/LoginForm";
+import ProfileSetup from "./components/ProfileSetup/ProfileSetup";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               </Route>
               <Route path="register" element={<RegisterForm />} />
               <Route path="login" element={<LoginForm />} />
+              <Route path="profileSetup" element={<ProfileSetup />} />
             </Routes>
           </BrowserRouter>
         </MoodDataProvider>
