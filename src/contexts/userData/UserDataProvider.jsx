@@ -10,8 +10,6 @@ function reducer(state, action) {
         [action.field]: action.payload,
         error: null,
       };
-    case "login":
-      return { ...state, email: action.payload, error: null };
     case "error":
       return { ...state, error: action.payload };
     default:
@@ -22,11 +20,17 @@ function reducer(state, action) {
 export default function UserDataProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, {
     userName: "",
+    date: new Date().toLocaleString("default", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }),
     error: null,
   });
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
+  // useEffect(() => {
+  //   console.log(state);
+  // }, [state]);
   return (
     <userDataContext.Provider value={{ state, dispatch }}>
       {children}

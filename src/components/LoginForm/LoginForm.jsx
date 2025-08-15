@@ -1,20 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 // import style from './LoginForm.module.css'
 import HeaderForm from "../HeaderForm/HeaderForm";
-// import { useUserData } from "../../contexts/userData/UserDataProvider";
-// import { register } from "../Firebase/SignupWithEmailAndPassword";
 import FormButton from "../FormButton/FormButton";
 import Logo from "../Logo/Logo";
 import { Link } from "react-router-dom";
 import FormLabel from "../FormLabel/FormLabel";
 import FormInput from "../FormInput/FormInput";
 import FormIntro from "../FormIntro/FormIntro";
+import { useAuth } from "../../contexts/authContext/AuthProvider";
 
 export default function LoginForm() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    if (!email.trim() && !password.trim()) {
+      setError("email and password are required");
+    }
+    try {
+      await login(email, password);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(true);
+    }
+  }
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <form
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         className="m-auto w-lg rounded-3xl bg-white p-8 shadow-lg"
       >
         <div className="mb-10 flex justify-center">
@@ -29,14 +48,10 @@ export default function LoginForm() {
             id="email"
             name="email"
             placeholder="name@email.com"
-            // value={state.email}
-            // onChange={(e) =>
-            //   dispatch({
-            //     type: "register",
-            //     field: e.target.name,
-            //     payload: e.target.value,
-            //   })
-            // }
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
 
           <FormLabel htmlFor="password">Password</FormLabel>
@@ -45,14 +60,8 @@ export default function LoginForm() {
             name="password"
             id="password"
             placeholder="****"
-            // value={state.password}
-            // onChange={(e) =>
-            //   dispatch({
-            //     type: "register",
-            //     field: e.target.name,
-            //     payload: e.target.value,
-            //   })
-            // }
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <FormButton>Log in</FormButton>

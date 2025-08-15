@@ -1,42 +1,69 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import HeaderForm from "../HeaderForm/HeaderForm";
-import { useUserData } from "../../contexts/userData/UserDataProvider";
 import { register } from "../Firebase/SignupWithEmailAndPassword";
 import FormButton from "../FormButton/FormButton";
 import Logo from "../Logo/Logo";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormLabel from "../FormLabel/FormLabel";
 import FormInput from "../FormInput/FormInput";
 import FormIntro from "../FormIntro/FormIntro";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
+function reducer(state, action) {
+  switch (action.type) {
+    case "updateField":
+      return { ...state, [action.field]: action.payload };
+    case "setError":
+      return { ...state, [action.field]: action.payload };
+    case "clearErrors":
+      return { ...state, emailError: "", passwordError: "", formError: "" };
+    default:
+      return state;
+  }
+}
 export default function RegisterForm() {
-  const { state, dispatch } = useUserData();
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-
+  const [state, dispatch] = useReducer(reducer, {
+    email: "",
+    password: "",
+    emailError: "",
+    passwordError: "",
+    formError: "",
+  });
   async function handleSubmit(e) {
     e.preventDefault();
-    setEmailError("");
-    setPasswordError("");
+    dispatch({ type: "clearErrors" });
     let hasError = false;
-
-    if (!email.trim()) {
-      setEmailError("Email is required");
+    if (!state.email.trim()) {
+      dispatch({
+        type: "setError",
+        field: "emailError",
+        payload: "Email is required!",
+      });
       hasError = true;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setEmailError("Please enter a valid email address");
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email)) {
+      dispatch({
+        type: "setError",
+        field: "emailError",
+        payload: " Please enter a valid email address!",
+      });
       hasError = true;
     }
 
-    if (!password.trim()) {
-      setPasswordError("Password is required");
+    if (!state.password.trim()) {
+      dispatch({
+        type: "setError",
+        field: "passwordError",
+        payload: "Password is required!",
+      });
       hasError = true;
-    } else if (!/^\d{6}$/.test(password)) {
-      setPasswordError("Password must be exactly 6 digits");
+    } else if (!/^\d{6}$/.test(state.password)) {
+      dispatch({
+        type: "setError",
+        field: "passwordError",
+        payload: "Password must be exactly 6 digits!",
+      });
       hasError = true;
     }
 
@@ -45,11 +72,14 @@ export default function RegisterForm() {
     }
     setLoading(true);
     try {
-      await register(email, password);
-      setEmail("");
-      setPassword("");
+      await register(state.email, state.password);
+      navigate("/profileSetup");
     } catch (error) {
-      dispatch({ type: "error", payload: error.message });
+      dispatch({
+        type: "setError",
+        field: "formError",
+        payload: error.message,
+      });
     } finally {
       setLoading(false);
     }
@@ -84,38 +114,70 @@ export default function RegisterForm() {
             type="email"
             id="email"
             name="email"
-            value={email}
+            value={state.email}
             placeholder="name@email.com"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) =>
+              dispatch({
+                type: "updateField",
+                field: e.target.name,
+                payload: e.target.value,
+              })
+            }
             onBlur={(e) => {
               if (!e.target.value) {
-                setEmailError("Email is required");
+                dispatch({
+                  type: "setError",
+                  field: "emailError",
+                  payload: "Email is required!",
+                });
               } else {
-                setEmailError("");
+                dispatch({
+                  type: "setError",
+                  field: "emailError",
+                  payload: "",
+                });
               }
             }}
           />
           <div className="min-h-5">
-            {emailError && <ErrorMessage>{emailError}</ErrorMessage>}
+            {state.emailError && (
+              <ErrorMessage>{state.emailError}</ErrorMessage>
+            )}
           </div>
           <FormLabel htmlFor="password">Password</FormLabel>
           <FormInput
             type="password"
             name="password"
             id="password"
-            value={password}
+            value={state.password}
             placeholder="******"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) =>
+              dispatch({
+                type: "updateField",
+                field: e.target.name,
+                payload: e.target.value,
+              })
+            }
             onBlur={(e) => {
               if (!e.target.value) {
-                setPasswordError("Password is required");
+                dispatch({
+                  type: "setError",
+                  field: "passwordError",
+                  payload: "Password is required!",
+                });
               } else {
-                setPasswordError("");
+                dispatch({
+                  type: "setError",
+                  field: "passwordError",
+                  payload: "",
+                });
               }
             }}
           />
           <div className="min-h-5">
-            {passwordError && <ErrorMessage>{passwordError}</ErrorMessage>}
+            {state.passwordError && (
+              <ErrorMessage>{state.passwordError}</ErrorMessage>
+            )}
           </div>
         </div>
         <div className="mt-5">
@@ -124,7 +186,7 @@ export default function RegisterForm() {
           </FormButton>
         </div>
         <div className="mt-5">
-          {state.error && <ErrorMessage>{state.error}</ErrorMessage>}
+          {state.formError && <ErrorMessage>{state.formError}</ErrorMessage>}
         </div>
         <p className="mt-5 text-center text-lg text-gray-600">
           Already got an account?{" "}

@@ -1,14 +1,17 @@
 import React from "react";
 import HeaderForm from "../HeaderForm/HeaderForm";
 import { Link } from "react-router-dom";
-import { useMoodData } from "../../contexts/moodData/MoodDataProvider";
+import { useUserData } from "../../contexts/userData/UserDataProvider";
 
 export default function WelcomeBanner() {
-  const { state } = useMoodData();
+  // const { state } = useMoodData();
+  const { state } = useUserData();
 
   return (
     <div className="mt-16 text-center">
-      <p className="mb-5 text-3xl font-bold text-blue-500">Hello kareem</p>
+      <p className="mb-5 text-3xl font-bold text-blue-500">
+        Hello, {state.userName}!
+      </p>
       <h1 className="text-5xl font-extrabold text-blue-950">
         How are you feeling today?
       </h1>

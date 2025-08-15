@@ -20,12 +20,6 @@ function reducer(state, action) {
 function MoodDataProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, {
     step: 1,
-    date: new Date().toLocaleString("default", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    }),
     moodName: "",
     feelMood: "",
     logMood: "",
